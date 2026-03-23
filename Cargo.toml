@@ -1,0 +1,5 @@
+[package]
+name = "pampa"
+version = "0.0.1"
+description = "Packae to allow basic functions of creating, updating, deleting and reading tasks"
+edition = "2021"
