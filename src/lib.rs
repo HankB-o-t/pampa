@@ -71,9 +71,9 @@ impl Task {
     /// # Examples
     ///
     /// ```rust,ignore
-    /// read_file(1);
+    /// read_file(1.to_string());
     /// ```
-    pub fn read_file(task_id: i32) -> String {
+    pub fn read_file(task_id: String) -> String {
         let mut file = File::open(format!("tasks/task{}.txt", task_id)).unwrap();
         let mut contents = String::new();
         file.read_to_string(&mut contents);
@@ -131,7 +131,7 @@ mod tests {
         task.write_file(task_id.clone());
 
         // Probar lectura
-        let content = Task::read_file(1);
+        let content = Task::read_file(1.to_string());
         let expected_content = "1\ntarea ejemplo\n";
         
         assert_eq!(content, expected_content);
