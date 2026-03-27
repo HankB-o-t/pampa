@@ -1,6 +1,6 @@
 [package]
 name = "pampa"
-version = "0.0.2a"
+version = "0.0.3"
 description = "Package to allow basic functions of creating, updating, deleting and reading tasks"
 edition = "2021"
 license = "MIT"
