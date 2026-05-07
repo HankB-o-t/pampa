@@ -1,5 +1,6 @@
 use std::fs::{self, File};
 use std::io::prelude::*;
+pub mod task_functions;
 
 /// Struct made for creating tasks
 /// Note: Create a folder named "tasks"
@@ -33,79 +34,15 @@ impl Task {
             title: title,
         }
     }
-
-    /// Writes a task as a file with the contents given
-    ///
-    /// # Examples
-    ///
-    /// ```rust,ignore
-    /// let task = Task::init(0, "example");
-    /// task.write_file(0.to_string()); 
-    /// ```
-    pub fn write_file(&self, task_id: String) {
-        let mut file: File = File::create(format!("tasks/task{}.txt", task_id)).unwrap();
-
-        let id_string: String = format!("{}\n", self.id);
-        file.write_all(id_string.as_bytes()).unwrap();
-
-        let title_string = format!("{}\n", self.title);
-        file.write_all(title_string.as_bytes()).unwrap();
-
-        file.flush();
-    }
-    
-    /// Deletes a task
-    ///
-    /// # Examples
-    ///
-    /// ```rust,ignore
-    /// delete_file(0.to_string());
-    /// ```
-    pub fn delete_file(task_id: String) -> String {
-        fs::remove_file(format!("tasks/task{}.txt", task_id));
-        return task_id;
-    }
-
-    /// Reads a task, using id
-    ///
-    /// # Examples
-    ///
-    /// ```rust,ignore
-    /// read_file(1.to_string());
-    /// ```
-    pub fn read_file(task_id: String) -> String {
-        let mut file = File::open(format!("tasks/task{}.txt", task_id)).unwrap();
-        let mut contents = String::new();
-        file.read_to_string(&mut contents);
-        return contents;
-    }
-
-    /// Reads all tasks
-    ///
-    /// # Examples
-    /// 
-    /// ```rust,ignore
-    /// read_all_files();
-    /// ```
-    pub fn read_all_files() -> Vec<String> {
-        let mut vec: Vec<String> = vec![];
-
-        for entry in fs::read_dir("tasks").unwrap() {
-            let entry = entry.unwrap();
-            let dir = entry.path();
-            let mut file = File::open(dir).unwrap();
-            let mut contents = String::new();
-            file.read_to_string(&mut contents);
-            vec.push(contents);
-        }
-        return vec;
-    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use std::fs;
+    use crate::task_functions::create;
+    use crate::task_functions::remove;
+    use crate::task_functions::read;
 
     fn setup() {
         let _ = fs::create_dir_all("tasks");
