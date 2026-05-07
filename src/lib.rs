@@ -1,6 +1,9 @@
 use std::fs::{self, File};
 use std::io::prelude::*;
 pub mod task_functions;
+use crate::task_functions::create;
+use crate::task_functions::remove;
+use crate::task_functions::read;
 
 /// Struct made for creating tasks
 /// Note: Create a folder named "tasks"
@@ -40,9 +43,6 @@ impl Task {
 mod tests {
     use super::*;
     use std::fs;
-    use crate::task_functions::create;
-    use crate::task_functions::remove;
-    use crate::task_functions::read;
 
     fn setup() {
         let _ = fs::create_dir_all("tasks");
